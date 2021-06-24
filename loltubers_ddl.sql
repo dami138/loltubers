@@ -22,7 +22,7 @@ USE `Loltubers_db` ;
 -- Table `Loltubers_db`.`Champion`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `Loltubers_db`.`Champion` (
-  `id` INT NOT NULL,
+  `id` INT NOT NULL AUTO_INCREMENT,
   `name` VARCHAR(45) NOT NULL,
   `role` VARCHAR(45) NOT NULL,
   PRIMARY KEY (`id`))
@@ -46,9 +46,9 @@ ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `Loltubers_db`.`Youtuber`
+-- Table `Loltubers_db`.`Loltuber`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `Loltubers_db`.`Youtuber` (
+CREATE TABLE IF NOT EXISTS `Loltubers_db`.`Loltuber` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `name` VARCHAR(45) NOT NULL,
   `subscribers` INT NOT NULL,
@@ -57,7 +57,7 @@ CREATE TABLE IF NOT EXISTS `Loltubers_db`.`Youtuber` (
   `link` VARCHAR(255) NULL,
   `thumbnail` VARCHAR(255) NULL,
   PRIMARY KEY (`id`),
-  CONSTRAINT `fk_Youtuber_Champion1`
+  CONSTRAINT `fk_Loltuber_Champion1`
     FOREIGN KEY (`mostChamp_id`)
     REFERENCES `Loltubers_db`.`Champion` (`id`)
     ON DELETE NO ACTION
@@ -452,11 +452,11 @@ INSERT INTO LineUp (id, position, Champion_id) VALUES
 (219,'Sup',155);
 
 ###
-INSERT INTO Youtuber (id,name,subscribers,mostChamp_id,description,link,thumbnail) VALUES
+INSERT INTO Loltuber (id,name,subscribers,mostChamp_id,description,link,thumbnail) VALUES
 (1,"꿀탱탱",566000,99,null,"https://www.youtube.com/c/%EA%BF%80%ED%83%B1%ED%83%B1","https://yt3.ggpht.com/ytc/AAUvwng7vvJTptjPFM6agD9Vn3g0ntkPBpdSU6xV23Tf-Q=s88-c-k-c0x00ffffff-no-rj"),
 (2,"여왕럭스",87700,70,null,"https://www.youtube.com/channel/UCK42N3MyEcUFkV74Em6jRkg","https://yt3.ggpht.com/SFzg--ULubQX7Vz4KV6m5xHwz4pcV0aGYzF_d-3kdhj2FTwAmypELhFyEabVG3eVz_mWp6Wj=s88-c-k-c0x00ffffff-no-rj"),
 (3,"엔마",208000,144,"침착한 플레이","https://www.youtube.com/channel/UCF-rFAdN7dzd-SI2T3rkCaQ","https://yt3.ggpht.com/ytc/AAUvwnhdN43HKu6mx-FQ-CYHOBfUDhISSD6ncx1rGMZxjg=s88-c-k-c0x00ffffff-no-rj"),
-(4,"에프람",101000,null,"전 프로게이머의 서포터 강의","https://www.youtube.com/channel/UCVgTydj9KUfDm_qmXPtx0FA","https://yt3.ggpht.com/ytc/AAUvwni9yt9IgGPgMhrBdSjs_Zcx87XCQeGO2xBbcKLirQ=s176-c-k-c0x00ffffff-no-rj-mo"),
+(4,"에프람",101000,null,"전 프로게이머의 서포터 강의","https://www.youtube.com/channel/UCVgTydj9KUfDm_qmXPtx0FA","https://yt3.ggpht.com/ytc/AAUvwni9yt9IgGPgMhrBdSjs_Zcx87XCQeGO2xBbcKLirQ=s176-c-k-c0x00ffffff-no-rj"),
 (5,"저라뎃",702000,null,"챌린저 정글러","https://www.youtube.com/channel/UC1dG3vI9FfHnH3YgyeKUz_A","https://yt3.ggpht.com/ytc/AAUvwngDP8-qO4BGZbKnK8GG9qiFGxO4KlEdv12bJjI=s88-c-k-c0x00ffffff-no-rj"),
 (6,"괴물쥐 유튜브",880000,null,"원딜러 장지환","https://www.youtube.com/channel/UCDBAVzfX3yZ1hah0FHnOoaA/featured","https://yt3.ggpht.com/ytc/AAUvwnj8JQA7mmQTI5heF9zFW0qil1HXetPMRSyZFg2cbA=s88-c-k-c0x00ffffff-no-rj"),
 (7,"개리형",817000,87,null,"https://www.youtube.com/channel/UCRpdlPk671uOMiBtf5HtB3Q","https://yt3.ggpht.com/ytc/AAUvwngWqvxyLAuNiyg4si8ADkbKCsZqqBEjKyM-b3S4=s88-c-k-c0x00ffffff-no-rj"),
@@ -483,3 +483,19 @@ INSERT INTO Youtuber (id,name,subscribers,mostChamp_id,description,link,thumbnai
 (28,"레고77",107000,110,null,"https://www.youtube.com/channel/UCw9fP0nSoUygLDmvV1GdAZw","https://yt3.ggpht.com/ytc/AAUvwnit4hR0TF4zmt8y303hIl3RL7Y8xR3CYMtzvKoFUg=s88-c-k-c0x00ffffff-no-rj"),
 (29,"캐인유튜브",133000,98,null,"https://www.youtube.com/channel/UC-8S20Ll1gzPiu_YY8BgyaQ","https://yt3.ggpht.com/M2bMhg9ma2qa8Vl0opChO7hkdD6sktlRZ_3uW1FJAYEfdjzEk8WTHwOFFlG8vG1q8Ai4J8hHx2o=s88-c-k-c0x00ffffff-no-rj"),
 (30,"워윅의황제",17900,141,null,"https://www.youtube.com/channel/UCQ4YA6PJu_I76Q_UAdDgCTg","https://yt3.ggpht.com/ytc/AAUvwnirBIsFauCkS8gCEGnX6aXXspxHdwMFYAVEi7sT=s88-c-k-c0x00ffffff-no-rj");
+
+
+
+#######
+
+select * from LineUp
+    left join Champion on (LineUp.Champion_id = Champion.id)
+    left join Loltuber on (Champion.id = Loltuber.mostChamp_id);
+    
+#####
+select LineUp.position, Champion.name as champ, Champion.role, Loltuber.thumbnail, Loltuber.name, Loltuber.description, Loltuber.link, Loltuber.id from LineUp 
+    left join Champion on (LineUp.Champion_id = Champion.id) 
+    left join Loltuber on (Champion.id = Loltuber.mostChamp_id);
+    
+    
+    
